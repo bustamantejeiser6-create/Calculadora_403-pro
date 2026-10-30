@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora ET403 Pro</title>
+<style>
+:root{--violeta:#9333EA; --violeta-osc:#6B21A8; --azul:#2563EB; --verde:#15803D}
+body{background: radial-gradient(circle at top, #1e3a8a, #0f0f3a); font-family: Segoe UI; color:white; margin:0; padding:20px}
+h1{text-align:center; color:#7dd3fc}
+.card{max-width:480px; margin:20px auto; background:rgba(20,30,80,0.8); border:1px solid #3b82f6; border-radius:24px; padding:20px; box-shadow:0 0 30px rgba(147,51,234,0.5)}
+.display{background:#0a1030; border-radius:16px; padding:15px; text-align:right; font-size:2.5em; min-height:50px; margin-bottom:15px; border:1px solid var(--violeta)}
+.grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.btn{padding:18px; border-radius:14px; border:none; font-weight:bold; font-size:1.1em; cursor:pointer; background:#3b82f6; color:white}
+.btn.op{background:var(--violeta)}
+.btn.eq{background:var(--verde)}
+.btn:active{transform:scale(0.95)}
+.conv{max-width:480px; margin:20px auto; background:rgba(20,30,80,0.8); border:1px solid var(--violeta); border-radius:16px; padding:15px}
+.conv input{width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0}
+.msg{color:#f87171; font-weight:bold; margin-top:5px}
+</style>
+</head>
+<body>
+<h1>Calculadora ET403 Pro</h1>
+<p style="text-align:center">Operaciones y conversión en una sola herramienta.</p>
+
+<div class="card">
+<div style="display:flex; justify-content:space-between; font-size:0.7em; color:#7dd3fc"><span>ET403</span><span style="color:#4ade80">● ONLINE</span></div>
+<div class="display" id="res">0</div>
+<div class="grid">
+<button class="btn" onclick="clearAll()">AC</button><button class="btn" onclick="del()">DEL</button><button class="btn" onclick="add('%')">%</button><button class="btn op" onclick="add('/')">÷</button>
+<button class="btn" onclick="add('7')">7</button><button class="btn" onclick="add('8')">8</button><button class="btn" onclick="add('9')">9</button><button class="btn op" onclick="add('*')">x</button>
+<button class="btn" onclick="add('4')">4</button><button class="btn" onclick="add('5')">5</button><button class="btn" onclick="add('6')">6</button><button class="btn op" onclick="add('-')">-</button>
+<button class="btn" onclick="add('1')">1</button><button class="btn" onclick="add('2')">2</button><button class="btn" onclick="add('3')">3</button><button class="btn op" onclick="add('+')">+</button>
+<button class="btn" onclick="add('+/-')">+/-</button><button class="btn" onclick="add('0')">0</button><button class="btn" onclick="add('.')">.</button><button class="btn eq" onclick="calc()">=</button>
+</div>
+<div style="margin-top:10px; font-size:0.6em; color:#93c5fd; display:flex; justify-content:space-between"><span>CALCULADORA DIGITAL</span><span>VERSIÓN 1.0</span></div>
+</div>
+
+<div class="conv">
+<h3 style="color:var(--violeta)">Conversión Longitud - PRUEBA 1m=100cm</h3>
+<input id="m" placeholder="Metros (m)" type="number" oninput="convM()">
+<input id="cm" placeholder="Centímetros (cm)" type="number" oninput="convCm()">
+<div id="msgL" class="msg"></div>
+</div>
+
+<div class="conv">
+<h3 style="color:var(--verde)">Conversión Peso - PRUEBA 1kg=1000g</h3>
+<input id="kg" placeholder="Kilogramos (kg)" type="number" oninput="convKg()">
+<input id="g" placeholder="Gramos (g)" type="number" oninput="convG()">
+<div id="msgP" class="msg"></div>
+</div>
+
+<div class="conv" style="border-color:var(--azul)">
+<b>Colores del proyecto</b><br>
+AZUL #2563EB | VERDE #15803D | VIOLETA #9333EA RGB(107,33,168)
+</div>
+
+<script>
+let exp="";
+function add(v){ if(v=='+/-'){exp=exp.startsWith('-')?exp.slice(1):'-'+exp}else exp+=v; document.getElementById('res').innerText=exp||"0"}
+function clearAll(){exp=""; document.getElementById('res').innerText="0"}
+function del(){exp=exp.slice(0,-1); document.getElementById('res').innerText=exp||"0"}
+function calc(){ try{ if(!exp) throw "vacío"; let r=eval(exp); if(r<0) throw "negativo"; document.getElementById('res').innerText=r; exp=""+r }catch(e){ document.getElementById('res').innerText=e=="vacío"?"Campo vacío":e=="negativo"?"negativo no permitido":"Error"} }
+
+function showMsg(id,txt){document.getElementById(id).innerText=txt}
+function convM(){let v=document.getElementById('m').value; if(v===""){showMsg('msgL',"Campo vacío");return} if(v<0){showMsg('msgL',"negativo no permitido - valor negativo rechazado");return} showMsg('msgL',""); document.getElementById('cm').value=v*100}
+function convCm(){let v=document.getElementById('cm').value; if(v===""){showMsg('msgL',"Campo vacío");return} if(v<0){showMsg('msgL',"negativo no permitido");return} showMsg('msgL',""); document.getElementById('m').value=v/100}
+function convKg(){let v=document.getElementById('kg').value; if(v===""){showMsg('msgP',"Campo vacío");return} if(v<0){showMsg('msgP',"negativo no permitido");return} showMsg('msgP',""); document.getElementById('g').value=v*1000}
+function convG(){let v=document.getElementById('g').value; if(v===""){showMsg('msgP',"Campo vacío");return} if(v<0){showMsg('msgP',"negativo no permitido");return} showMsg('msgP',""); document.getElementById('kg').value=v/1000}
+</script>
+</body>
+</html>

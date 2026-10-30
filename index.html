@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora ET403 Pro</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Calculadora ET403 Pro</h1>
+<p style="text-align:center">Operaciones y conversión en una sola herramienta.</p>
+
+<div class="card">
+<div style="display:flex; justify-content:space-between; font-size:0.7em; color:#7dd3fc"><span>ET403</span><span style="color:#4ade80">● ONLINE</span></div>
+<div class="display" id="res">0</div>
+<div class="grid">
+<button class="btn" onclick="clearAll()">AC</button><button class="btn" onclick="del()">DEL</button><button class="btn" onclick="add('%')">%</button><button class="btn op" onclick="add('/')">÷</button>
+<button class="btn" onclick="add('7')">7</button><button class="btn" onclick="add('8')">8</button><button class="btn" onclick="add('9')">9</button><button class="btn op" onclick="add('*')">x</button>
+<button class="btn" onclick="add('4')">4</button><button class="btn" onclick="add('5')">5</button><button class="btn" onclick="add('6')">6</button><button class="btn op" onclick="add('-')">-</button>
+<button class="btn" onclick="add('1')">1</button><button class="btn" onclick="add('2')">2</button><button class="btn" onclick="add('3')">3</button><button class="btn op" onclick="add('+')">+</button>
+<button class="btn" onclick="add('+/-')">+/-</button><button class="btn" onclick="add('0')">0</button><button class="btn" onclick="add('.')">.</button><button class="btn eq" onclick="calc()">=</button>
+</div>
+<div style="margin-top:10px; font-size:0.6em; color:#93c5fd; display:flex; justify-content:space-between"><span>CALCULADORA DIGITAL</span><span>VERSIÓN 1.0</span></div>
+</div>
+
+<div class="conv">
+<h3 style="color:var(--violeta)">Conversión Longitud - PRUEBA 1m=100cm</h3>
+<input id="m" placeholder="Metros (m)" type="number" oninput="convM()">
+<input id="cm" placeholder="Centímetros (cm)" type="number" oninput="convCm()">
+<div id="msgL" class="msg"></div>
+</div>
+
+<div class="conv">
+<h3 style="color:var(--verde)">Conversión Peso - PRUEBA 1kg=1000g</h3>
+<input id="kg" placeholder="Kilogramos (kg)" type="number" oninput="convKg()">
+<input id="g" placeholder="Gramos (g)" type="number" oninput="convG()">
+<div id="msgP" class="msg"></div>
+</div>
+
+<div class="conv" style="border-color:var(--azul)">
+<b>Colores del proyecto</b><br>
+AZUL #2563EB | VERDE #15803D | VIOLETA #9333EA RGB(107,33,168)
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
